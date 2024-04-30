@@ -22,8 +22,8 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class OpenApiController {
     
-    @GetMapping("/movie")
-    public Mono<String> getMovie() {
-        return Mono.just("movie");
+    @GetMapping("/")
+    public Mono<String> getMovies() {
+        return null;
     }
 }
