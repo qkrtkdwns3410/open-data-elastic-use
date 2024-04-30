@@ -2,7 +2,9 @@ package org.search.elastic.steka.openapi.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import reactor.core.publisher.Mono;
 
 /**
  * packageName    : org.search.elastic.steka.openapi.api
@@ -19,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api/openapi")
 @RequiredArgsConstructor
 public class OpenApiController {
-
     
-
+    @GetMapping("/movie")
+    public Mono<String> getMovie() {
+        return Mono.just("movie");
+    }
 }
