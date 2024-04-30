@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: open-data-elastic-use
+  jpa:
+    open-in-view: false

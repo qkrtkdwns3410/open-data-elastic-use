@@ -9,5 +9,4 @@ public class StekaApplication {
     public static void main(String[] args) {
         SpringApplication.run(StekaApplication.class, args);
     }
-    
 }
