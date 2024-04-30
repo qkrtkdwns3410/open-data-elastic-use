@@ -48,3 +48,17 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.register('copyYaml', Copy) {
+    copy {
+        from 'open-data-elastic-use-setting/src/main/resources'
+        into '/src/main/resources'
+        include '*.yaml' // YAML 파일만 포함
+    }
+
+    copy {
+        from 'open-data-elastic-use-setting/env'
+        into '/'
+        include '*.env.json' // YML 파일만 포함
+    }
+}
