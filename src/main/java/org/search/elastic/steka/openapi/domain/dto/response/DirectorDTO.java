@@ -1,6 +1,7 @@
 package org.search.elastic.steka.openapi.domain.dto.response;
 
 import lombok.Builder;
+import org.search.elastic.steka.openapi.domain.vo.Director;
 
 /**
  * packageName    : org.search.elastic.steka.openapi.domain.dto.response
@@ -18,5 +19,11 @@ public record DirectorDTO(
 ) {
     @Builder
     public DirectorDTO {
+    }
+    
+    public Director toDocument() {
+        return Director.builder()
+                .peopleNm(peopleNm)
+                .build();
     }
 }

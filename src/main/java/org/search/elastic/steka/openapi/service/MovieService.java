@@ -4,13 +4,15 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.search.elastic.steka.openapi.client.MovieOpenClient;
+import org.search.elastic.steka.openapi.domain.document.Movie;
 import org.search.elastic.steka.openapi.domain.dto.request.MovieSearchRequestDTO;
 import org.search.elastic.steka.openapi.domain.dto.response.MovieSearchResponseDTO;
 import org.search.elastic.steka.openapi.repository.MovieEsRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 /**
  * packageName    : org.search.elastic.steka.openapi.service
@@ -31,13 +33,12 @@ public class MovieService {
     private final MovieOpenClient movieOpenClient;
     private final MovieEsRepository movieEsRepository;
     
-    public Flux<MovieSearchResponseDTO> getMovies(@Valid MovieSearchRequestDTO movieSearchRequestDTO) {
+    @Transactional(readOnly = false)
+    public Iterable<Movie> saveMoviesBulkToEs(List<Movie> movies) {
+        return movieEsRepository.saveAll(movies);
+    }
+    
+    public Flux<MovieSearchResponseDTO> getMoviesFromOpenApi(@Valid MovieSearchRequestDTO movieSearchRequestDTO) {
         return movieOpenClient.getMovies(movieSearchRequestDTO);
     }
-    
-    //호출된 값을 es 에 저장하기
-    public void saveMovies() {
-        movieEsRepository.saveAll();
-    }
-    
 }

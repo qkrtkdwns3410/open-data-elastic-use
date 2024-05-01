@@ -1,6 +1,7 @@
 package org.search.elastic.steka.openapi.domain.dto.response;
 
 import lombok.Builder;
+import org.search.elastic.steka.openapi.domain.vo.Company;
 
 /**
  * packageName    : org.search.elastic.steka.openapi.domain.dto.response
@@ -19,5 +20,12 @@ public record CompanyDTO(
 ) {
     @Builder
     public CompanyDTO {
+    }
+    
+    public Company toDocument() {
+        return Company.builder()
+                .companyCd(companyCd)
+                .companyNm(companyNm)
+                .build();
     }
 }

@@ -1,2 +1,13 @@
+### 영화 목록 조회 API
 GET http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json
     ?key={{service-key}}
+
+```
+
+### 영화 목록 배치
+POST http://localhost:8080/api/openapi/movie/batch
+content-type: application/json
+
+{
+  "itemPerPage": 10000
+}

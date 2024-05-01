@@ -1,6 +1,7 @@
-package org.search.elastic.steka.openapi.domain.collection;
+package org.search.elastic.steka.openapi.domain.vo;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -25,4 +26,10 @@ public class Company {
     
     @Field(type = FieldType.Text)
     private String companyNm;
+    
+    @Builder
+    private Company(String companyCd, String companyNm) {
+        this.companyCd = companyCd;
+        this.companyNm = companyNm;
+    }
 }

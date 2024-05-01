@@ -1,6 +1,7 @@
-package org.search.elastic.steka.openapi.domain.collection;
+package org.search.elastic.steka.openapi.domain.vo;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -22,4 +23,9 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 public class Director {
     @Field(type = FieldType.Text)
     private String peopleNm;
+    
+    @Builder
+    private Director(String peopleNm) {
+        this.peopleNm = peopleNm;
+    }
 }

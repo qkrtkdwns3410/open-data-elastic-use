@@ -27,7 +27,7 @@ import java.util.stream.Stream;
 @Configuration
 public class WebClientConfig {
     
-    @Value("${movie.openapi.service-key}")
+    @Value("${movie.api.service-key}")
     private String serviceKey;
     
     @Bean

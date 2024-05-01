@@ -1,6 +1,6 @@
 package org.search.elastic.steka.openapi.repository;
 
-import org.search.elastic.steka.openapi.domain.collection.Movie;
+import org.search.elastic.steka.openapi.domain.document.Movie;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 

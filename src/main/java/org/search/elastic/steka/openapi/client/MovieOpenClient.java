@@ -45,6 +45,12 @@ public class MovieOpenClient {
                 .retrieve()
                 .bodyToFlux(MovieSearchResponseDTO.class)
                 .doOnComplete(() -> log.info("complete"))
-                .doOnError(throwable -> log.error("error : {}", throwable.getMessage()));
+                .doOnError(throwable -> {
+                    log.error("error : {}", throwable.getMessage());
+                })
+                .onErrorResume(throwable -> {
+                    log.error("Error retrieving movies from OpenAPI : {}", throwable.getMessage());
+                    return Flux.empty();
+                });
     }
 }

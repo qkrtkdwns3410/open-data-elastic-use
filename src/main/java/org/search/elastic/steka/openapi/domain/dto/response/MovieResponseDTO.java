@@ -1,8 +1,10 @@
 package org.search.elastic.steka.openapi.domain.dto.response;
 
 import lombok.Builder;
+import org.search.elastic.steka.openapi.domain.document.Movie;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * packageName    : org.search.elastic.steka.openapi.domain.dto.response
@@ -33,5 +35,23 @@ public record MovieResponseDTO(
     
     @Builder
     public MovieResponseDTO {
+    }
+    
+    public Movie toDocument() {
+        return Movie.builder()
+                .movieCd(movieCd)
+                .movieNm(movieNm)
+                .movieNmEn(movieNmEn)
+                .prdtYear(prdtYear)
+                .openDt(openDt)
+                .typeNm(typeNm)
+                .prdtStatNm(prdtStatNm)
+                .nationAlt(nationAlt)
+                .genreAlt(genreAlt)
+                .repNationNm(repNationNm)
+                .repGenreNm(repGenreNm)
+                .directors(directors.stream().map(DirectorDTO::toDocument).collect(Collectors.toList()))
+                .companys(companys.stream().map(CompanyDTO::toDocument).collect(Collectors.toList()))
+                .build();
     }
 }
