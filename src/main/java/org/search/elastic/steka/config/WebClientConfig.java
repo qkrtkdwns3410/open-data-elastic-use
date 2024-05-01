@@ -1,5 +1,6 @@
 package org.search.elastic.steka.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,7 @@ import java.util.stream.Stream;
  * 24. 4. 30.        ipeac       최초 생성
  */
 @Configuration
+@Slf4j
 public class WebClientConfig {
     
     @Value("${movie.api.service-key}")
@@ -39,6 +41,8 @@ public class WebClientConfig {
     }
     
     private ExchangeFilterFunction addQueryString(String param, String value) {
+        log.info("addQueryString : param={}, value={}", param, value);
+        
         return (clientRequest, nextFilter) -> {
             URI oldUri = clientRequest.url();
             String originalQuery = oldUri.getQuery() != null ? oldUri.getQuery() : "";

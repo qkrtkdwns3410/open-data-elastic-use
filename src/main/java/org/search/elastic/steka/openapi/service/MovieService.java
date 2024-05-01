@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.search.elastic.steka.openapi.client.MovieOpenClient;
 import org.search.elastic.steka.openapi.domain.document.Movie;
 import org.search.elastic.steka.openapi.domain.dto.request.MovieSearchRequestDTO;
-import org.search.elastic.steka.openapi.domain.dto.response.MovieSearchResponseDTO;
+import org.search.elastic.steka.openapi.domain.dto.response.MovieListResultWrapper;
 import org.search.elastic.steka.openapi.repository.MovieEsRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +38,7 @@ public class MovieService {
         return movieEsRepository.saveAll(movies);
     }
     
-    public Flux<MovieSearchResponseDTO> getMoviesFromOpenApi(@Valid MovieSearchRequestDTO movieSearchRequestDTO) {
+    public Flux<MovieListResultWrapper> getMoviesFromOpenApi(@Valid MovieSearchRequestDTO movieSearchRequestDTO) {
         return movieOpenClient.getMovies(movieSearchRequestDTO);
     }
 }

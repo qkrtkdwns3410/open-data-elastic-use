@@ -31,9 +31,6 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 
-    //Database
-    runtimeOnly 'org.postgresql:postgresql'
-
     // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -44,7 +41,6 @@ dependencies {
     testImplementation 'io.projectreactor:reactor-test'
     testImplementation 'org.testcontainers:elasticsearch'
     testImplementation 'org.testcontainers:junit-jupiter'
-    testImplementation 'org.testcontainers:postgresql'
 }
 
 tasks.named('test') {
