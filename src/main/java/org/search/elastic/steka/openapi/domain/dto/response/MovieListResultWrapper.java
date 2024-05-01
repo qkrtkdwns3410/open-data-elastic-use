@@ -2,25 +2,21 @@ package org.search.elastic.steka.openapi.domain.dto.response;
 
 import lombok.Builder;
 
-import java.util.List;
-
 /**
  * packageName    : org.search.elastic.steka.openapi.domain.dto.response
- * fileName       : MovieSearchResponse
+ * fileName       : MovieListResultWrapper
  * author         : ipeac
- * date           : 24. 4. 30.
+ * date           : 24. 5. 1.
  * description    :
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 24. 4. 30.        ipeac       최초 생성
+ * 24. 5. 1.        ipeac       최초 생성
  */
-public record MovieSearchResponseDTO(
-        int totCnt,
-        String source,
-        List<MovieResponseDTO> movieList
+public record MovieListResultWrapper(
+        MovieSearchResponseDTO movieListResult
 ) {
     @Builder
-    public MovieSearchResponseDTO {
+    public MovieListResultWrapper {
     }
 }

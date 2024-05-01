@@ -29,8 +29,8 @@ public class MovieOperatonFacade {
         
         movieService.getMoviesFromOpenApi(requestDTO)
                 .publishOn(Schedulers.boundedElastic())
-                .doOnNext(movieSearchResponseDTO -> {
-                    movieService.saveMoviesBulkToEs(movieSearchResponseDTO.movieList().stream()
+                .doOnNext(movieListResultWrapper -> {
+                    movieService.saveMoviesBulkToEs(movieListResultWrapper.movieListResult().movieList().stream()
                             .map(MovieResponseDTO::toDocument)
                             .toList());
                 })

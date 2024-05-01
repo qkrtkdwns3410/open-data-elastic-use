@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.search.elastic.steka.openapi.domain.dto.request.MovieSearchRequestDTO;
-import org.search.elastic.steka.openapi.domain.dto.response.MovieSearchResponseDTO;
+import org.search.elastic.steka.openapi.domain.dto.response.MovieListResultWrapper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -26,7 +26,7 @@ import reactor.core.publisher.Flux;
 public class MovieOpenClient {
     private final WebClient webclient;
     
-    public Flux<MovieSearchResponseDTO> getMovies(@Valid MovieSearchRequestDTO movieSearchRequestDTO) {
+    public Flux<MovieListResultWrapper> getMovies(@Valid MovieSearchRequestDTO movieSearchRequestDTO) {
         return webclient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/movie/searchMovieList.json")
@@ -43,7 +43,7 @@ public class MovieOpenClient {
                         .build()
                 )
                 .retrieve()
-                .bodyToFlux(MovieSearchResponseDTO.class)
+                .bodyToFlux(MovieListResultWrapper.class)
                 .doOnComplete(() -> log.info("complete"))
                 .doOnError(throwable -> {
                     log.error("error : {}", throwable.getMessage());

@@ -6,7 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.search.elastic.steka.openapi.domain.dto.request.MovieSearchRequestDTO;
 import org.search.elastic.steka.openapi.service.MovieOperatonFacade;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * packageName    : org.search.elastic.steka.openapi.api
@@ -21,12 +23,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Slf4j
 @RequestMapping("/api/openapi")
+@RestController
 @RequiredArgsConstructor
 public class OpenApiController {
     private final MovieOperatonFacade movieOperatonFacade;
     
     @PostMapping("/batch/movies")
-    public void batchAllMovies(@Valid MovieSearchRequestDTO requestDTO) {
+    public void batchAllMovies(@Valid @RequestBody MovieSearchRequestDTO requestDTO) {
         movieOperatonFacade.synchronizeMoviesToEs(requestDTO);
     }
 }

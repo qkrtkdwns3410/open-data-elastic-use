@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Document(indexName = "MOVIE")
+@Document(indexName = "movie")
 public class Movie {
     @Id
     @Field(type = FieldType.Keyword)
@@ -38,7 +38,7 @@ public class Movie {
     @Field(type = FieldType.Text)
     private String movieNmEn;
     
-    @Field(type = FieldType.Date)
+    @Field(type = FieldType.Keyword)
     private String prdtYear;
     
     @Field(type = FieldType.Keyword)
