@@ -9,5 +9,5 @@ POST http://localhost:8080/api/openapi/movie/batch
 content-type: application/json
 
 {
-  "itemPerPage": 10000
+  "itemPerPage": 100
 }
