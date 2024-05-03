@@ -40,6 +40,13 @@ public class WebClientConfig {
                 .build();
     }
     
+    /**
+     * 쿼리스트링에 서비스 키를 추가한다.
+     *
+     * @param param
+     * @param value
+     * @return
+     */
     private ExchangeFilterFunction addQueryString(String param, String value) {
         log.info("addQueryString : param={}, value={}", param, value);
         
