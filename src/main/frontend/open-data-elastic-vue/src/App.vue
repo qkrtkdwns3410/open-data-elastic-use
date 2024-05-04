@@ -1,91 +1,46 @@
-<script setup lang="ts">
-import {RouterLink, RouterView} from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
-</script>
-
 <template>
-  <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="@/assets/logo.svg"
-      width="125"
-      height="125"
-    />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <div class="search-container">
+    <input type="text" v-bind:value="searchQuery" placeholder="영화를 검색해주세요"
+           @input="($event: any) => searchQuery = $event.target.value" @keyup="fetchAutocomplete"/>
+    <ul v-if="autocompleteResults.length">
+      <li v-for="(result, index) in autocompleteResults" :key="index">
+        {{ result.movieNm }}
+      </li>
+    </ul>
+  </div>
 </template>
 
+<script setup lang="ts">
+import {nextTick, ref, watch} from "vue";
+import axios from "axios";
+import {AutoCompleteResponseDTO} from "@/domain/dto/response/AutoCompleteResponseDTO";
+
+const searchQuery = ref('');
+const autocompleteResults = ref(<AutoCompleteResponseDTO[]>([]));
+const fetchAutocomplete = async () => {
+  await nextTick();
+
+  if (searchQuery.value.length > 0) {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/search?query=${searchQuery.value}`);
+      autocompleteResults.value = response.data.map((item: any) => AutoCompleteResponseDTO.of(item.movieNm as string));
+    } catch (error) {
+      console.error('API 호출 중 오류 발생:', error);
+      autocompleteResults.value = [];
+    }
+    return;
+  }
+
+  autocompleteResults.value = [];
+};
+watch(searchQuery, (newQuery) => {
+  if (newQuery === '') {
+    autocompleteResults.value = [];
+  }
+});
+
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
+/*생략*/
 </style>
