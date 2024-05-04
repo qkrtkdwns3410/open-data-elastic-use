@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.search.elastic.steka.openapi.domain.document.Movie;
 import org.search.elastic.steka.openapi.repository.MovieEsRepository;
 import org.search.elastic.steka.search.model.dto.response.AutoCompleteResonseDTO;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
@@ -30,7 +31,7 @@ public class SearchService {
     public Flux<AutoCompleteResonseDTO> search(String query) {
         log.info("search : query={}", query);
         
-        Flux<Movie> byMovieNmStartingWith = movieEsRepository.findByMovieNmStartingWith(query);
+        Flux<Movie> byMovieNmStartingWith = movieEsRepository.findByMovieNmStartingWith(query, PageRequest.of(1, 10));
         
         return byMovieNmStartingWith.map(Movie::toAutoCompleteResonseDTO);
     }

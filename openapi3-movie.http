@@ -9,5 +9,5 @@ POST http://localhost:8080/api/openapi/batch/movies
 content-type: application/json
 
 ### 영화 검색
-GET http://localhost:8080/api/search?query=영화
+GET http://localhost:8080/api/search?query=은
 Content-Type: application/json

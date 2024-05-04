@@ -33,7 +33,7 @@ public class Movie {
     @Field(type = FieldType.Keyword)
     private String movieCd;
     
-    @Field(type = FieldType.Text, analyzer = "nori")
+    @Field(type = FieldType.Text, analyzer = "nori", searchAnalyzer = "nori")
     private String movieNm;
     
     @Field(type = FieldType.Text)
