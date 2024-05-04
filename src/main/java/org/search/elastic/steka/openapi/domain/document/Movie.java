@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.search.elastic.steka.openapi.domain.vo.Company;
 import org.search.elastic.steka.openapi.domain.vo.Director;
+import org.search.elastic.steka.search.model.dto.response.AutoCompleteResonseDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -32,7 +33,7 @@ public class Movie {
     @Field(type = FieldType.Keyword)
     private String movieCd;
     
-    @Field(type = FieldType.Text)
+    @Field(type = FieldType.Text, analyzer = "nori")
     private String movieNm;
     
     @Field(type = FieldType.Text)
@@ -83,5 +84,11 @@ public class Movie {
         this.repGenreNm = repGenreNm;
         this.directors = directors;
         this.companys = companys;
+    }
+    
+    public AutoCompleteResonseDTO toAutoCompleteResonseDTO() {
+        return AutoCompleteResonseDTO.builder()
+                .movieNm(movieNm)
+                .build();
     }
 }
