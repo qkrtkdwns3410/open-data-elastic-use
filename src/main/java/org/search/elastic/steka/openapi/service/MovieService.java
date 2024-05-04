@@ -35,8 +35,7 @@ public class MovieService {
     
     @Transactional(readOnly = false)
     public Flux<Movie> saveMoviesBulkToEs(List<Movie> movies) {
-        return Flux.fromIterable(movieEsRepository.saveAll(movies))
-                .doOnNext(movie -> log.info("Saved movie to ES movieNm: {}", movie.getMovieNm()));
+        return movieEsRepository.saveAll(movies);
     }
     
     public Flux<MovieListResultWrapper> getMoviesFromOpenApi(@Valid MovieSearchRequestDTO movieSearchRequestDTO) {

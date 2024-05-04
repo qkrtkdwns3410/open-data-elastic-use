@@ -1,8 +1,0 @@
-
-###
-POST http://localhost:8080/api/openapi/batch/movies
-Content-Type: application/json
-
-{
-  "itemPerPage": "20000"
-}

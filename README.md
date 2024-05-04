@@ -14,3 +14,7 @@
 - Search : Elasticsearch
 - Progrmming Language : Java, Javascript
 - Build Tool : Gradle
+
+## 기능 구현 영상
+
+![시연 영상](play.gif)

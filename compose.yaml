@@ -4,5 +4,18 @@ services:
     environment:
       - 'discovery.type=single-node'
       - 'xpack.security.enabled=false'
+      - 'bootstrap.memory_lock=true'
+    command:
+      - sh
+      - -c
+      - |
+        bin/elasticsearch-plugin list &&
+        bin/elasticsearch-plugin install analysis-nori &&
+        exec docker-entrypoint.sh elasticsearch
     ports:
       - '9200:9200'
+    volumes:
+      - 'elasticsearch-data:/usr/share/elasticsearch/data'
+
+volumes:
+  elasticsearch-data:
