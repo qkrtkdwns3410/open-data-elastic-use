@@ -1,4 +1,4 @@
-package org.search.elastic.steka.search.api;
+package org.search.elastic.steka.search.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +31,7 @@ public class SearchService {
     public Flux<AutoCompleteResonseDTO> search(String query) {
         log.info("search : query={}", query);
         
-        Flux<Movie> byMovieNmStartingWith = movieEsRepository.findByMovieNmStartingWith(query, PageRequest.of(1, 10));
+        Flux<Movie> byMovieNmStartingWith = movieEsRepository.findByMovieNmStartingWith(query, PageRequest.of(0, 10));
         
         return byMovieNmStartingWith.map(Movie::toAutoCompleteResonseDTO);
     }

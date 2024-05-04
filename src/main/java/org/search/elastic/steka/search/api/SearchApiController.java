@@ -3,6 +3,7 @@ package org.search.elastic.steka.search.api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.search.elastic.steka.search.model.dto.response.AutoCompleteResonseDTO;
+import org.search.elastic.steka.search.service.SearchService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
