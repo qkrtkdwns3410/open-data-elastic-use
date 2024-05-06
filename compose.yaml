@@ -9,8 +9,12 @@ services:
       - sh
       - -c
       - |
-        bin/elasticsearch-plugin list &&
-        bin/elasticsearch-plugin install analysis-nori &&
+        if ! bin/elasticsearch-plugin list | grep -q analysis-nori; then
+          echo 'installing analysis-nori plugin'
+          bin/elasticsearch-plugin install analysis-nori
+        else
+          echo 'analysis-nori plugin already installed'
+        fi
         exec docker-entrypoint.sh elasticsearch
     ports:
       - '9200:9200'
