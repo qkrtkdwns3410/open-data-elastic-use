@@ -20,6 +20,8 @@ import reactor.core.publisher.Flux;
  */
 @Repository
 public interface MovieEsRepository extends ReactiveElasticsearchRepository<Movie, String> {
-    @Query("{\"regexp\":{\"movieNm\":\"?0.*\"}}")
+    @Query("""
+            {"match_phrase_prefix":{"movieNm":{"query":"?0" , "max_expansions":10}}}
+            """)
     Flux<Movie> findByMovieNmStartingWith(String startMovieName, Pageable pageable);
 }

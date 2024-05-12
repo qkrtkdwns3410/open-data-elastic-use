@@ -15,6 +15,11 @@
 - Progrmming Language : Java, Javascript
 - Build Tool : Gradle
 
-## 기능 구현 영상
+## 기능 구현 영상(패치전)
 
 ![시연 영상](play.gif)
+
+## 패치
+1. 2024-05-12
+    - es 첫번째 토크나이저에 해당하는 영화 제목만 검색하도록 수정 
+    - 관련 테스트 코드 작성
