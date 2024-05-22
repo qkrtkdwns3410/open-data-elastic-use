@@ -32,43 +32,43 @@ public class Movie {
     @Id
     @Field(type = FieldType.Keyword)
     private String movieCd;
-    
+
     @Field(type = FieldType.Text, analyzer = "nori", searchAnalyzer = "nori")
     private String movieNm;
-    
+
     @Field(type = FieldType.Text)
     private String movieNmEn;
-    
+
     @Field(type = FieldType.Keyword)
     private String prdtYear;
-    
+
     @Field(type = FieldType.Keyword)
     private String openDt;
-    
+
     @Field(type = FieldType.Keyword)
     private String typeNm;
-    
+
     @Field(type = FieldType.Keyword)
     private String prdtStatNm;
-    
+
     @Field(type = FieldType.Keyword)
     private String nationAlt;
-    
+
     @Field(type = FieldType.Keyword)
     private String genreAlt;
-    
+
     @Field(type = FieldType.Keyword)
     private String repNationNm;
-    
+
     @Field(type = FieldType.Keyword)
     private String repGenreNm;
-    
+
     @Field(type = FieldType.Nested)
     private List<Director> directors;
-    
+
     @Field(type = FieldType.Nested)
     private List<Company> companys;
-    
+
     @Builder
     private Movie(String movieCd, String movieNm, String movieNmEn, String prdtYear, String openDt, String typeNm, String prdtStatNm, String nationAlt, String genreAlt, String repNationNm, String repGenreNm, List<Director> directors, List<Company> companys) {
         this.movieCd = movieCd;
@@ -85,10 +85,11 @@ public class Movie {
         this.directors = directors;
         this.companys = companys;
     }
-    
+
     public AutoCompleteResonseDTO toAutoCompleteResonseDTO() {
         return AutoCompleteResonseDTO.builder()
                 .movieNm(movieNm)
+                .movieNmEn(movieNmEn)
                 .build();
     }
 }

@@ -27,12 +27,14 @@ import reactor.core.publisher.Flux;
 @Transactional(readOnly = true)
 public class SearchService {
     private final MovieEsRepository movieEsRepository;
-    
+
     public Flux<AutoCompleteResonseDTO> search(String query) {
         log.info("search : query={}", query);
-        
-        Flux<Movie> byMovieNmStartingWith = movieEsRepository.findByMovieNmStartingWith(query, PageRequest.of(0, 10));
-        
+
+        long start = System.currentTimeMillis();
+        Flux<Movie> byMovieNmStartingWith = movieEsRepository.findByMovieNmStartingWithOrMovieNmEnStartingWith(query, query, PageRequest.of(0, 10));
+        log.info("search : query={}, elapsed={}", query, System.currentTimeMillis() - start);
+
         return byMovieNmStartingWith.map(Movie::toAutoCompleteResonseDTO);
     }
 }
