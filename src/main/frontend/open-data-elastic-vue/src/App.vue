@@ -4,7 +4,7 @@
            @input="($event: any) => searchQuery = $event.target.value" @keyup="fetchAutocomplete"/>
     <ul v-if="autocompleteResults.length">
       <li v-for="(result, index) in autocompleteResults" :key="index">
-        {{ result.movieNm }}
+        {{ result.movieNm }} , {{ result.movieNmEn }}
       </li>
     </ul>
   </div>
@@ -23,7 +23,8 @@ const fetchAutocomplete = async () => {
   if (searchQuery.value.length > 0) {
     try {
       const response = await axios.get(`http://localhost:8080/api/search?query=${searchQuery.value}`);
-      autocompleteResults.value = response.data.map((item: any) => AutoCompleteResponseDTO.of(item.movieNm as string));
+      autocompleteResults.value = response.data.map((item: any) => AutoCompleteResponseDTO.of(item.movieNm as string, item.movieNmEn as string));
+      console.log(autocompleteResults.value);
     } catch (error) {
       console.error('API 호출 중 오류 발생:', error);
       autocompleteResults.value = [];

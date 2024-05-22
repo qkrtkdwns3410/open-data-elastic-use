@@ -11,17 +11,23 @@
  */
 class AutoCompleteResponseDTO {
     private readonly _movieNm: string;
+    private readonly _movieNmEn: string;
 
-    private constructor(movieNm: string) {
+    private constructor(movieNm: string, movieNmEn: string) {
         this._movieNm = movieNm;
+        this._movieNmEn = movieNmEn
     }
 
     get movieNm(): string {
         return this._movieNm;
     }
 
-    public static of(movieNm: string): AutoCompleteResponseDTO {
-        return new AutoCompleteResponseDTO(movieNm);
+    get movieNmEn(): string {
+        return this._movieNmEn;
+    }
+
+    public static of(movieNm: string, movieNmEn: string): AutoCompleteResponseDTO {
+        return new AutoCompleteResponseDTO(movieNm, movieNmEn);
     }
 }
 
